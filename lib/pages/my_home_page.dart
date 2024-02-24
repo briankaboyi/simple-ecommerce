@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:simplecommerce/controller/home_controller.dart';
+import 'package:simplecommerce/pages/product_page.dart';
 import 'package:simplecommerce/widgets/product_widget.dart';
 import 'package:simplecommerce/widgets/text_widget.dart';
 
@@ -54,10 +55,10 @@ class MyHomePage extends GetView<HomeController> {
                               child: TextField(
                                 controller: _searchController,
                                 decoration: InputDecoration(
-                                    labelText: 'Search Anything',
-                                    labelStyle: TextStyle(fontSize: 16),
-                                    enabledBorder: InputBorder.none,
-                                  focusedBorder:InputBorder.none,
+                                  labelText: 'Search Anything',
+                                  labelStyle: TextStyle(fontSize: 16),
+                                  enabledBorder: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
                                 ),
                               ),
                             ),
@@ -79,41 +80,58 @@ class MyHomePage extends GetView<HomeController> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: controller.categories.map((e) {
                       return Obx(() => Padding(
-                        padding: const EdgeInsets.only(top: 25.0),
-                        child: InkWell(
-                            onTap: (){
-                              controller.currentLabel.value = e;
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10),
-                                  color: controller.currentLabel.value == e ? Color(0xff000000):Color(0xfff2f2f2)),
-                              child: Padding(
-                                padding: const EdgeInsets.only(top: 8.0,bottom: 8.0,left: 13, right:13),
-                                child: TextWidget(
-                                    color: controller.currentLabel.value == e ? Color(0xffffffff) : Color(0xff000000) ,
-                                    value: e,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w400,
-                                    textAlign: TextAlign.start),
-                              ),
-                            )),
-                      ));
+                            padding: const EdgeInsets.only(top: 25.0),
+                            child: InkWell(
+                                onTap: () {
+                                  controller.currentLabel.value = e;
+                                },
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: controller.currentLabel.value == e
+                                          ? Color(0xff000000)
+                                          : Color(0xfff2f2f2)),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 8.0,
+                                        bottom: 8.0,
+                                        left: 13,
+                                        right: 13),
+                                    child: TextWidget(
+                                        color:
+                                            controller.currentLabel.value == e
+                                                ? Color(0xffffffff)
+                                                : Color(0xff000000),
+                                        value: e,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w400,
+                                        textAlign: TextAlign.start),
+                                  ),
+                                )),
+                          ));
                     }).toList(),
                   )
                 ],
               ),
             )),
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Wrap(children: controller.products.map((e){
-          return ProductWidget(title: e['title'] ?? '' ,img: e['img'] ?? '', price: e['price'] ?? '');
-        }).toList()
-
+      body: Padding(
+        padding: const EdgeInsets.only(right:8.0,left: 8.0,top: 20.0),
+        child: Column(
+          children: [
+            Expanded(
+              child: GridView.count(
+                childAspectRatio: (1 /1.3),
+                crossAxisCount: 2,
+                  children: List.generate(controller.products.length, (index) {
+                    var e = controller.products[index];
+                    return InkWell(onTap: (){Get.to(ProductPage());}, child: ProductWidget(img: e['img'], title: e['title'], price: e['price']));
+                  }),
+                  ),
+            ),
+          ],
         ),
       ),
-
     );
   }
 }
