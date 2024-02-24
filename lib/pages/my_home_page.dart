@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:simplecommerce/controller/home_controller.dart';
+import 'package:simplecommerce/widgets/product_widget.dart';
 import 'package:simplecommerce/widgets/text_widget.dart';
 
 class MyHomePage extends GetView<HomeController> {
@@ -104,6 +105,15 @@ class MyHomePage extends GetView<HomeController> {
               ),
             )),
       ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Wrap(children: controller.products.map((e){
+          return ProductWidget(title: e['title'] ?? '' ,img: e['img'] ?? '', price: e['price'] ?? '');
+        }).toList()
+
+        ),
+      ),
+
     );
   }
 }
