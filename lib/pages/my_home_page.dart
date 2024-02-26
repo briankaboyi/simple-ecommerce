@@ -131,7 +131,7 @@ class MyHomePage extends GetView<HomeController> {
             ),
           ],
         ),
-      ),git
+      ),
     );
   }
 }
