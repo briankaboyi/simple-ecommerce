@@ -124,14 +124,17 @@ class MyHomePage extends GetView<HomeController> {
                 childAspectRatio: (1 /1.3),
                 crossAxisCount: 2,
                   children: List.generate(controller.products.length, (index) {
+                    controller.currentIndex = index;
+
                     var e = controller.products[index];
-                    return InkWell(onTap: (){Get.to(ProductPage());}, child: ProductWidget(img: e['img'], title: e['title'], price: e['price']));
+                    return InkWell(onTap: (){print('llllllllllllllllllllllllllllllllllll${controller.currentIndex}' );Get.to(ProductPage());}, child: ProductWidget(img: e['img'], title: e['title'], price: e['price']));
                   }),
                   ),
             ),
           ],
         ),
       ),
+
     );
   }
 }

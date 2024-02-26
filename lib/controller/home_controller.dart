@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 class HomeController {
+  late int currentIndex;
   RxString currentLabel = 'All'.obs;
   RxString currentSize = ''.obs;
   List<String> categories = ['All', 'Men', 'Women', 'Kids'];
