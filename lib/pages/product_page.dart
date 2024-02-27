@@ -98,25 +98,28 @@ class ProductPage extends GetView<HomeController> {
                       onTap: () {
                         controller.currentSize.value = e;
                       },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6.25),
-                          border: Border.all(color: Colors.black),
-                          color: controller.currentSize.value == e
-                              ? Colors.black
-                              : Colors.white,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                              top: 15.0, bottom: 15, right: 19, left: 19),
-                          child: TextWidget(
-                            value: e,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w500,
-                            textAlign: TextAlign.start,
+                      child: Padding(
+                        padding: const EdgeInsets.only(right :8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6.25),
+                            border: Border.all(color: Colors.black),
                             color: controller.currentSize.value == e
-                                ? Colors.white
-                                : Colors.black,
+                                ? Colors.black
+                                : Colors.white,
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(
+                                top: 15.0, bottom: 15, right: 19, left: 19),
+                            child: TextWidget(
+                              value: e,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                              textAlign: TextAlign.start,
+                              color: controller.currentSize.value == e
+                                  ? Colors.white
+                                  : Colors.black,
+                            ),
                           ),
                         ),
                       ),
