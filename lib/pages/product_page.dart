@@ -9,8 +9,6 @@ import 'package:simplecommerce/widgets/text_widget.dart';
 class ProductPage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
-    var currentIndex = controller.currentIndex;
-    var currentItem = controller.products[currentIndex];
     // TODO: implement build
     return Scaffold(
       backgroundColor: Color(0xffffffff),
@@ -54,14 +52,14 @@ class ProductPage extends GetView<HomeController> {
               SizedBox(
                 width: Get.width,
                 child: Image.asset(
-                  currentItem['img'],
+                  controller.products[controller.currentIndex.value]['img'],
                   fit: BoxFit.cover,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.only(top:15.0,bottom: 10),
                 child: TextWidget(
-                    value: currentItem['title'],
+                    value: controller.products[controller.currentIndex.value]['title'],
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     textAlign: TextAlign.start),
@@ -82,7 +80,7 @@ class ProductPage extends GetView<HomeController> {
                 padding: const EdgeInsets.only(top: 15.0,bottom: 15.0),
                 child: TextWidget(
                     value:
-                        'The Name Says It All, the Right Size Slightly Snugs the Body Leaving Enough Room for Comfort in the Sleeves and Waist.',
+                    'The Name Says It All, the Right Size Slightly Snugs the Body Leaving Enough Room for Comfort in the Sleeves and Waist.',
                     fontSize: 16,
                     fontWeight: FontWeight.w200,
                     textAlign: TextAlign.start),
@@ -97,37 +95,37 @@ class ProductPage extends GetView<HomeController> {
                 child: Row(
                   children: ['S', 'M', 'L'].map((e) {
                     return Obx(() => InkWell(
-                          onTap: () {
-                            controller.currentSize.value = e;
-                          },
-                          child: Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6.25),
-                              border: Border.all(color: Colors.black),
-                              color: controller.currentSize.value == e
-                                  ? Colors.black
-                                  : Colors.white,
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 15.0, bottom: 15, right: 19, left: 19),
-                              child: TextWidget(
-                                value: e,
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500,
-                                textAlign: TextAlign.start,
-                                color: controller.currentSize.value == e
-                                    ? Colors.white
-                                    : Colors.black,
-                              ),
-                            ),
+                      onTap: () {
+                        controller.currentSize.value = e;
+                      },
+                      child: Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(6.25),
+                          border: Border.all(color: Colors.black),
+                          color: controller.currentSize.value == e
+                              ? Colors.black
+                              : Colors.white,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                              top: 15.0, bottom: 15, right: 19, left: 19),
+                          child: TextWidget(
+                            value: e,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w500,
+                            textAlign: TextAlign.start,
+                            color: controller.currentSize.value == e
+                                ? Colors.white
+                                : Colors.black,
                           ),
-                        ));
+                        ),
+                      ),
+                    ));
                   }).toList(),
                 ),
               )
             ],
-          ),
+          ) ,
         ),
       ),
       bottomNavigationBar: Container(

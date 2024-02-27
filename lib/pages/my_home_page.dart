@@ -6,9 +6,11 @@ import 'package:simplecommerce/controller/home_controller.dart';
 import 'package:simplecommerce/pages/product_page.dart';
 import 'package:simplecommerce/widgets/product_widget.dart';
 import 'package:simplecommerce/widgets/text_widget.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class MyHomePage extends GetView<HomeController> {
   final TextEditingController _searchController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -116,25 +118,48 @@ class MyHomePage extends GetView<HomeController> {
             )),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(right:8.0,left: 8.0,top: 20.0),
+        padding: const EdgeInsets.only(right: 8.0, left: 8.0, top: 20.0),
         child: Column(
           children: [
             Expanded(
-              child: GridView.count(
-                childAspectRatio: (1 /1.3),
-                crossAxisCount: 2,
-                  children: List.generate(controller.products.length, (index) {
-                    controller.currentIndex = index;
-
-                    var e = controller.products[index];
-                    return InkWell(onTap: (){print('llllllllllllllllllllllllllllllllllll${controller.currentIndex}' );Get.to(ProductPage());}, child: ProductWidget(img: e['img'], title: e['title'], price: e['price']));
-                  }),
-                  ),
+              //     child: GridView.builder(
+              //
+              //   itemCount: controller.products.length,
+              //   itemBuilder: (BuildContext context, int index) {
+              //     var e = controller.products[index];
+              //     return InkWell(
+              //         onTap: () {
+              //           controller.currentIndex.value=index;
+              //           Get.to(ProductPage());
+              //         },
+              //         child: ProductWidget(
+              //             img: e['img'], title: e['title'], price: e['price']));
+              //   },
+              //   gridDelegate:
+              //       SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+              // )
+              child: MasonryGridView.builder(
+                itemCount: controller.products.length,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 4,
+                gridDelegate: SliverSimpleGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                ),
+                itemBuilder: (context, index) {
+                  var e = controller.products[index];
+                  return InkWell(
+                      onTap: () {
+                        controller.currentIndex.value = index;
+                        Get.to(ProductPage());
+                      },
+                      child: ProductWidget(
+                          img: e['img'], title: e['title'], price: e['price']));
+                },
+              ),
             ),
           ],
         ),
       ),
-
     );
   }
 }
