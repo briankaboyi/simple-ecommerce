@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:simplecommerce/controller/home_controller.dart';
 import 'package:simplecommerce/pages/product_page.dart';
+import 'package:simplecommerce/widgets/cart_widget.dart';
 import 'package:simplecommerce/widgets/product_widget.dart';
 import 'package:simplecommerce/widgets/text_widget.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -29,7 +30,7 @@ class MyHomePage extends GetView<HomeController> {
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 15.0, top: 30.0),
-            child: SvgPicture.asset('assets/Group 3.svg'),
+            child: CartWidget(),
           )
         ],
         bottom: PreferredSize(
