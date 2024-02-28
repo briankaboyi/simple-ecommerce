@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:simplecommerce/controller/home_controller.dart';
+import 'package:simplecommerce/widgets/cart_product_widget.dart';
 import 'package:simplecommerce/widgets/cart_widget.dart';
 import 'package:simplecommerce/widgets/text_widget.dart';
 
