@@ -45,7 +45,7 @@ class MyCartPage extends GetView<HomeController>{
      body:
       ListView.builder(itemCount: controller.myCartList.length,itemBuilder: (context,index){
         var item = controller.myCartList[index];
-         return CartProductWidget(img: item['img'], title: item['title'], price: item['price'], size: item['size']);
+         return CartProductWidget(img: item['img'], title: item['title'], price: item['price'], size: item['Size']);
        })
 
 

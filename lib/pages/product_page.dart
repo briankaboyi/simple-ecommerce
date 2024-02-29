@@ -160,7 +160,9 @@ class ProductPage extends GetView<HomeController> {
               ),
               InkWell(
                 onTap: (){
+                  controller.products[controller.currentIndex.value].addAll({'Size':controller.currentSize.value});
                   controller.myCartList.value.add(controller.products[controller.currentIndex.value]);
+                  // controller.myCartList.clear();
                   print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd${controller.myCartList.value}");
 
                 },
