@@ -158,11 +158,18 @@ class ProductPage extends GetView<HomeController> {
                   )
                 ],
               ),
-              ButtonWidgets(
-                  text:'Add to cart',
-                  width: 160,
-                  radius: 10,
-                  color: 0xff000000)
+              InkWell(
+                onTap: (){
+                  controller.myCartList.value.add(controller.products[controller.currentIndex.value]);
+                  print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd${controller.myCartList.value}");
+
+                },
+                child: ButtonWidgets(
+                    text:'Add to cart',
+                    width: 160,
+                    radius: 10,
+                    color: 0xff000000),
+              )
             ],
           ),
         ),

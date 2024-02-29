@@ -19,4 +19,5 @@ class HomeController {
     {'img': './assets/image 1.png', 'title': 'Regular Fit polo','price': 'KSH 1,590'},
 
   ];
+  RxList myCartList = [].obs;
 }
