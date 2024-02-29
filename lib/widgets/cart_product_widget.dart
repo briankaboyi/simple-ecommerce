@@ -7,6 +7,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:simplecommerce/widgets/text_widget.dart';
 
 class CartProductWidget extends GetView {
+  final String img;
+  final String title;
+  final String price;
+  final String size;
+
+  CartProductWidget({super.key, required this.img, required this.title, required this.price, required this.size});
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -23,7 +29,7 @@ class CartProductWidget extends GetView {
 
               borderRadius: BorderRadius.circular(10),
               child: Image.asset(
-                './assets/image 1.png',
+                img,
                 width: 100,
                 height: 100,
                 fit: BoxFit.cover,
@@ -44,15 +50,15 @@ class CartProductWidget extends GetView {
                                ,
                             children: [
                           TextSpan(
-                              text: 'Regular fit slogan\n',
+                              text: '$title\n',
                               style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold)),
                               WidgetSpan(
                                 child: SizedBox(height: 28), // Add spacing here
                               ),
-                          TextSpan(text: 'Size L', style: TextStyle(fontSize: 12,fontWeight: FontWeight.w200))
+                          TextSpan(text: size, style: TextStyle(fontSize: 12,fontWeight: FontWeight.w200))
                         ])),
                     TextWidget(
-                        value: 'PKR 1,190',
+                        value: price,
                         fontSize: 16,
                         fontWeight: FontWeight.w300,
                         textAlign: TextAlign.start)

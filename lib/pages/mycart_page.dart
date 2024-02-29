@@ -9,6 +9,7 @@ import 'package:simplecommerce/widgets/text_widget.dart';
 class MyCartPage extends GetView<HomeController>{
   @override
   Widget build(BuildContext context) {
+    print(controller.myCartList[0]);
    return Scaffold(
      appBar: AppBar(
        backgroundColor: Colors.transparent,
@@ -41,11 +42,13 @@ class MyCartPage extends GetView<HomeController>{
          )
        ],
      ),
-     body: Column(
-       children: [
-         CartProductWidget()
-       ],
-     )
+     body:
+      ListView.builder(itemCount: controller.myCartList.length,itemBuilder: (context,index){
+        var item = controller.myCartList[index];
+         return CartProductWidget(img: item['img'], title: item['title'], price: item['price'], size: item['size']);
+       })
+
+
      ,
    );
   }
