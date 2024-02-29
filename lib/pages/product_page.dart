@@ -8,8 +8,12 @@ import 'package:simplecommerce/widgets/cart_widget.dart';
 import 'package:simplecommerce/widgets/text_widget.dart';
 
 class ProductPage extends GetView<HomeController> {
+
+
   @override
   Widget build(BuildContext context) {
+    final RxString currentSize = ''.obs;
+    Map<String,dynamic> itemCopy = Map.from(controller.products[controller.currentIndex.value]);
     // TODO: implement build
     return Scaffold(
       backgroundColor: Color(0xffffffff),
@@ -95,9 +99,12 @@ class ProductPage extends GetView<HomeController> {
                 padding: const EdgeInsets.only(top:10.0,bottom: 15),
                 child: Row(
                   children: ['S', 'M', 'L'].map((e) {
+                    // var itemCopy = controller.products[controller.currentIndex.value];
                     return Obx(() => InkWell(
                       onTap: () {
-                        controller.currentSize.value = e;
+                        itemCopy[{'Size':'$e'}];
+                        currentSize.value = e;
+
                       },
                       child: Padding(
                         padding: const EdgeInsets.only(right :8.0),
@@ -105,7 +112,7 @@ class ProductPage extends GetView<HomeController> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(6.25),
                             border: Border.all(color: Colors.black),
-                            color: controller.currentSize.value == e
+                            color: currentSize.value == e
                                 ? Colors.black
                                 : Colors.white,
                           ),
@@ -117,7 +124,7 @@ class ProductPage extends GetView<HomeController> {
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
                               textAlign: TextAlign.start,
-                              color: controller.currentSize.value == e
+                              color: currentSize.value == e
                                   ? Colors.white
                                   : Colors.black,
                             ),
@@ -160,8 +167,8 @@ class ProductPage extends GetView<HomeController> {
               ),
               InkWell(
                 onTap: (){
-                  controller.products[controller.currentIndex.value].addAll({'Size':controller.currentSize.value});
-                  controller.myCartList.value.add(controller.products[controller.currentIndex.value]);
+                  // controller.products[controller.currentIndex.value].addAll({'Size':currentSize.value});
+                  controller.myCartList.value.add(itemCopy);
                   // controller.myCartList.clear();
                   print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd${controller.myCartList.value}");
 
