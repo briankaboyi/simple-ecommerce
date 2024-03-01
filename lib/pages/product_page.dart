@@ -12,9 +12,10 @@ class ProductPage extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    final RxString currentSize = ''.obs;
+
+
     Map<String,dynamic> itemCopy = Map.from(controller.products[controller.currentIndex.value]);
-    // TODO: implement build
+    print("ooooooooooooooooooooooooooooooooooooooooooooooo$itemCopy");
     return Scaffold(
       backgroundColor: Color(0xffffffff),
       appBar: AppBar(
@@ -102,8 +103,11 @@ class ProductPage extends GetView<HomeController> {
                     // var itemCopy = controller.products[controller.currentIndex.value];
                     return Obx(() => InkWell(
                       onTap: () {
-                        itemCopy[{'Size':'$e'}];
-                        currentSize.value = e;
+                        // itemCopy[{'Size''$e'}];
+                        itemCopy.update("Size", (value){
+                          value=e;
+                        });
+                        controller.currentSize.value = e;
 
                       },
                       child: Padding(
@@ -112,7 +116,7 @@ class ProductPage extends GetView<HomeController> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(6.25),
                             border: Border.all(color: Colors.black),
-                            color: currentSize.value == e
+                            color:  controller.currentSize.value == e
                                 ? Colors.black
                                 : Colors.white,
                           ),
@@ -124,7 +128,7 @@ class ProductPage extends GetView<HomeController> {
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
                               textAlign: TextAlign.start,
-                              color: currentSize.value == e
+                              color:  controller.currentSize.value == e
                                   ? Colors.white
                                   : Colors.black,
                             ),
@@ -168,7 +172,9 @@ class ProductPage extends GetView<HomeController> {
               InkWell(
                 onTap: (){
                   // controller.products[controller.currentIndex.value].addAll({'Size':currentSize.value});
-                  controller.myCartList.value.add(itemCopy);
+                  // itemCopy['Size'] = controller.currentSize.value;
+                  controller.myCartList.add(itemCopy);
+
                   // controller.myCartList.clear();
                   print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd${controller.myCartList.value}");
 
