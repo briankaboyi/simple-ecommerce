@@ -52,105 +52,108 @@ class MyCartPage extends GetView<HomeController> {
                   textAlign: TextAlign.center),
             )
           : Column(
-            children: [
-              Container(
-                height: 500,
-                child: ListView.builder(
-                        itemCount: controller.myCartList.length,
-                        itemBuilder: (context, index) {
-                var item = controller.myCartList[index]!;
-                var itemId = item['id']; // Assuming the item has an 'id' field
+              children: [
+                Container(
+                  height: 500,
+                  child: ListView.builder(
+                    itemCount: controller.myCartList.length,
+                    itemBuilder: (context, index) {
+                      var item = controller.myCartList[index]!;
+                      var itemId =
+                          item['id']; // Assuming the item has an 'id' field
 
-                return Container(
-                  key: ValueKey(itemId), // Use the item's ID as the key
-                  child: CartProductWidget(
-                    img: item['img'],
-                    title: item['title'],
-                    price: item['price'],
-                    size: item['Size'] ?? '',
+                      return Container(
+                        key: ValueKey(itemId), // Use the item's ID as the key
+                        child: CartProductWidget(
+                          img: item['img'],
+                          title: item['title'],
+                          price: item['price'],
+                          size: item['Size'] ?? '',
+                        ),
+                      );
+                    },
                   ),
-                );
-                        },
-                      ),
-              ),
-            ],
-          ),
-      bottomNavigationBar: Container(
-        height: 90,
-        child: Padding(
-          padding: const EdgeInsets.all(15.0),
-          child: Row(
+                ),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        TextWidget(
+                            value: 'Sub-total',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            textAlign: TextAlign.center),
+                        TextWidget(
+                            value: 'PKR 5,870',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            textAlign: TextAlign.center),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        TextWidget(
+                            value: 'VAT (%)',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            textAlign: TextAlign.center),
+                        TextWidget(
+                            value: 'PKR 0.00',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            textAlign: TextAlign.center),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        TextWidget(
+                            value: 'Shipping fee',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            textAlign: TextAlign.center),
+                        TextWidget(
+                            value: 'PKR 80',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            textAlign: TextAlign.center),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        TextWidget(
+                            value: 'Total',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            textAlign: TextAlign.center),
+                        TextWidget(
+                            value: 'PKR 5,950',
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            textAlign: TextAlign.center),
+                      ],
+                    ),
+                  ],
+                )
+              ],
+            ),
+      bottomNavigationBar:
+         Padding(
+           padding: const EdgeInsets.only(left: 15.0,right: 15,bottom: 15),
+           child: Row(
+             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                children: [
-                  TextWidget(
-                      value: 'Sub-total',
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      textAlign: TextAlign.center),
-                  TextWidget(
-                      value: 'PKR 5,870',
-                      fontSize:16,
-                      fontWeight: FontWeight.bold,
-                      textAlign: TextAlign.center),
-                ],
-              ),  Row(
-                children: [
-                  TextWidget(
-                      value: 'VAT (%)',
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      textAlign: TextAlign.center),
-                  TextWidget(
-                      value: 'PKR 0.00',
-                      fontSize:16,
-                      fontWeight: FontWeight.bold,
-                      textAlign: TextAlign.center),
-                ],
-              ),  Row(
-                children: [
-                  TextWidget(
-                      value: 'Shipping fee',
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      textAlign: TextAlign.center),
-                  TextWidget(
-                      value: 'PKR 80',
-                      fontSize:16,
-                      fontWeight: FontWeight.bold,
-                      textAlign: TextAlign.center),
-                ],
-              ),  Row(
-                children: [
-                  TextWidget(
-                      value: 'Total',
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      textAlign: TextAlign.center),
-                  TextWidget(
-                      value: 'PKR 5,950',
-                      fontSize:16,
-                      fontWeight: FontWeight.bold,
-                      textAlign: TextAlign.center),
-                ],
-              ),
-
-
-
               InkWell(
-                onTap: (){
-
-                },
+                onTap: () {},
                 child: ButtonWidgets(
-                    text:'CheckOut',
-                    width: Get.width,
+                    text: 'CheckOut',
+                    width:330,
                     radius: 10,
                     color: 0xff000000),
               )
             ],
-          ),
-        ),
-      ),
+                   ),
+         ),
+
     );
   }
 }
