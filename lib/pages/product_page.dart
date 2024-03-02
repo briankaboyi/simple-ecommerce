@@ -8,13 +8,10 @@ import 'package:simplecommerce/widgets/cart_widget.dart';
 import 'package:simplecommerce/widgets/text_widget.dart';
 
 class ProductPage extends GetView<HomeController> {
-
-
   @override
   Widget build(BuildContext context) {
-
-
-    Map<String,dynamic> itemCopy = Map.from(controller.products[controller.currentIndex.value]);
+    Map<String, dynamic> itemCopy =
+        Map.from(controller.products[controller.currentIndex.value]);
     print("ooooooooooooooooooooooooooooooooooooooooooooooo$itemCopy");
     return Scaffold(
       backgroundColor: Color(0xffffffff),
@@ -50,8 +47,9 @@ class ProductPage extends GetView<HomeController> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.only(top: 15.0,left: 15,right: 15),
-        child: SingleChildScrollView(scrollDirection: Axis.vertical,
+        padding: const EdgeInsets.only(top: 15.0, left: 15, right: 15),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -63,9 +61,10 @@ class ProductPage extends GetView<HomeController> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(top:15.0,bottom: 10),
+                padding: const EdgeInsets.only(top: 15.0, bottom: 10),
                 child: TextWidget(
-                    value: controller.products[controller.currentIndex.value]['title'],
+                    value: controller.products[controller.currentIndex.value]
+                        ['title'],
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                     textAlign: TextAlign.start),
@@ -83,10 +82,10 @@ class ProductPage extends GetView<HomeController> {
                     ]),
               ),
               Padding(
-                padding: const EdgeInsets.only(top: 15.0,bottom: 15.0),
+                padding: const EdgeInsets.only(top: 15.0, bottom: 15.0),
                 child: TextWidget(
                     value:
-                    'The Name Says It All, the Right Size Slightly Snugs the Body Leaving Enough Room for Comfort in the Sleeves and Waist.',
+                        'The Name Says It All, the Right Size Slightly Snugs the Body Leaving Enough Room for Comfort in the Sleeves and Waist.',
                     fontSize: 16,
                     fontWeight: FontWeight.w200,
                     textAlign: TextAlign.start),
@@ -97,50 +96,49 @@ class ProductPage extends GetView<HomeController> {
                   fontWeight: FontWeight.w500,
                   textAlign: TextAlign.start),
               Padding(
-                padding: const EdgeInsets.only(top:10.0,bottom: 15),
+                padding: const EdgeInsets.only(top: 10.0, bottom: 15),
                 child: Row(
                   children: ['S', 'M', 'L'].map((e) {
                     // var itemCopy = controller.products[controller.currentIndex.value];
                     return Obx(() => InkWell(
-                      onTap: () {
-                        // itemCopy[{'Size''$e'}];
-                        itemCopy.update("Size", (value){
-                          value=e;
-                        });
-                        controller.currentSize.value = e;
-
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(right :8.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(6.25),
-                            border: Border.all(color: Colors.black),
-                            color:  controller.currentSize.value == e
-                                ? Colors.black
-                                : Colors.white,
-                          ),
+                          onTap: () {
+                            // itemCopy[{'Size''$e'}];
+                            itemCopy.update("Size", (value) {
+                              value = e;
+                            });
+                            controller.currentSize.value = e;
+                          },
                           child: Padding(
-                            padding: const EdgeInsets.only(
-                                top: 15.0, bottom: 15, right: 19, left: 19),
-                            child: TextWidget(
-                              value: e,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              textAlign: TextAlign.start,
-                              color:  controller.currentSize.value == e
-                                  ? Colors.white
-                                  : Colors.black,
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6.25),
+                                border: Border.all(color: Colors.black),
+                                color: controller.currentSize.value == e
+                                    ? Colors.black
+                                    : Colors.white,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 15.0, bottom: 15, right: 19, left: 19),
+                                child: TextWidget(
+                                  value: e,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w500,
+                                  textAlign: TextAlign.start,
+                                  color: controller.currentSize.value == e
+                                      ? Colors.white
+                                      : Colors.black,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
-                      ),
-                    ));
+                        ));
                   }).toList(),
                 ),
               )
             ],
-          ) ,
+          ),
         ),
       ),
       bottomNavigationBar: Container(
@@ -170,17 +168,23 @@ class ProductPage extends GetView<HomeController> {
                 ],
               ),
               InkWell(
-                onTap: (){
+                onTap: () {
                   // controller.products[controller.currentIndex.value].addAll({'Size':currentSize.value});
                   // itemCopy['Size'] = controller.currentSize.value;
                   controller.myCartList.add(itemCopy);
 
                   // controller.myCartList.clear();
-                  print("ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd${controller.myCartList.value}");
-
+                  print(
+                      "ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd${controller.myCartList.value}");
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Item Added to Cart"),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
                 },
                 child: ButtonWidgets(
-                    text:'Add to cart',
+                    text: 'Add to cart',
                     width: 160,
                     radius: 10,
                     color: 0xff000000),
