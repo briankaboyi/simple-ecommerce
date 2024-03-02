@@ -17,9 +17,13 @@ class CartProductWidget extends GetView {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Container(
-      height: 120,
+      height: 126,
       width: Get.width,
-      color: Color(0xfff2f2f2),
+      decoration: BoxDecoration(
+        color: Color(0xfff2f2f2),
+        borderRadius: BorderRadius.circular(10),
+
+      ),
       child: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Row(
