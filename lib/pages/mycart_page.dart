@@ -61,7 +61,9 @@ class MyCartPage extends GetView<HomeController> {
                     child: ListView.builder(
                       itemCount: controller.myCartList.length,
                       itemBuilder: (context, index) {
-                        var item = controller.myCartList[index]!;
+                        // var item = controller.myCartList[index]!;
+                        var item =controller.myCartList[index].productProperties;
+                        var itemSize =controller.myCartList[index].size;
                         var itemId =
                             item['id']; // Assuming the item has an 'id' field
 
@@ -73,7 +75,7 @@ class MyCartPage extends GetView<HomeController> {
                               img: item['img'],
                               title: item['title'],
                               price: item['price'],
-                              size: item['Size'] ?? '',
+                              size: itemSize,
                             ),
                           ),
                         );

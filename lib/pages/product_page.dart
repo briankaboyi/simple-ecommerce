@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:simplecommerce/controller/home_controller.dart';
+import 'package:simplecommerce/entity/product.dart';
 import 'package:simplecommerce/widgets/button_widget.dart';
 import 'package:simplecommerce/widgets/cart_widget.dart';
 import 'package:simplecommerce/widgets/text_widget.dart';
@@ -11,7 +12,8 @@ class ProductPage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     Map<String, dynamic> itemCopy =
-        Map.from(controller.products[controller.currentIndex.value]);
+        Map.from(controller.products[controller.currentIndex.value]);//the map properties
+
     print("ooooooooooooooooooooooooooooooooooooooooooooooo$itemCopy");
     return Scaffold(
       backgroundColor: Color(0xffffffff),
@@ -99,10 +101,8 @@ class ProductPage extends GetView<HomeController> {
                 padding: const EdgeInsets.only(top: 10.0, bottom: 15),
                 child: Row(
                   children: ['S', 'M', 'L'].map((e) {
-                    // var itemCopy = controller.products[controller.currentIndex.value];
                     return Obx(() => InkWell(
                           onTap: () {
-                            // itemCopy[{'Size''$e'}];
                             itemCopy.update("Size", (value) {
                               value = e;
                             });
@@ -169,13 +169,11 @@ class ProductPage extends GetView<HomeController> {
               ),
               InkWell(
                 onTap: () {
-                  // controller.products[controller.currentIndex.value].addAll({'Size':currentSize.value});
-                  // itemCopy['Size'] = controller.currentSize.value;
-                  controller.myCartList.add(itemCopy);
 
-                  // controller.myCartList.clear();
+                  controller.myCartList.add(Product(itemCopy,controller.currentSize.value));
+
                   print(
-                      "ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd${controller.myCartList.value}");
+                      "ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd${controller.myCartList[0].productProperties}");
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text("Item Added to Cart"),
