@@ -274,6 +274,7 @@ class MyCartPage extends GetView<HomeController> {
 
                                               controller.updateCartRecords(controller.myCartList, itemId,  controller.currentSize
                                                   .value );
+                                              Navigator.pop(context);
                                             },
                                             child: ButtonWidgets(
                                                 text: 'Save',

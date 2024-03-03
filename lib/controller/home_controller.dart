@@ -43,7 +43,7 @@ class HomeController {
     //i want to add items to the cart already edited, then it can be changed afterwards.
     records.forEach((element) {
       if(element.id==id){
-        element.size= newContent;
+        element.size.value= newContent;
       }
     });
   }
