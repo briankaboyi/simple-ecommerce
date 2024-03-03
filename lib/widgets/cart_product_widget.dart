@@ -10,7 +10,7 @@ class CartProductWidget extends GetView {
   final String img;
   final String title;
   final String price;
-  final String size;
+  final RxString size;
 
   CartProductWidget({super.key, required this.img, required this.title, required this.price, required this.size});
   @override
@@ -59,7 +59,7 @@ class CartProductWidget extends GetView {
                               WidgetSpan(
                                 child: SizedBox(height: 28), // Add spacing here
                               ),
-                          TextSpan(text: size, style: TextStyle(fontSize: 12,fontWeight: FontWeight.w200))
+                          TextSpan(text: size.value, style: TextStyle(fontSize: 12,fontWeight: FontWeight.w200))
                         ])),
                     TextWidget(
                         value: price,
@@ -75,7 +75,7 @@ class CartProductWidget extends GetView {
 
               children: [
                 Align(alignment: Alignment.topCenter,child: SvgPicture.asset('assets/deleteicon.svg', height: 18)),
-                ClipRRect(borderRadius: BorderRadius.circular(10),child: Container(width: 45,height: 20,color: Colors.black,))
+                ClipRRect(borderRadius: BorderRadius.circular(10),child: Container(width: 45,height: 20,color: Colors.black,child: Center(child: Text('Edit' , style: TextStyle(color: Colors.white),)),))
               ],
             )
           ],

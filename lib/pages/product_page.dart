@@ -11,8 +11,8 @@ import 'package:simplecommerce/widgets/text_widget.dart';
 class ProductPage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> itemCopy =
-        Map.from(controller.products[controller.currentIndex.value]);//the map properties
+    Map<String, dynamic> itemCopy = Map.from(controller
+        .products[controller.currentIndex.value]); //the map properties
 
     print("ooooooooooooooooooooooooooooooooooooooooooooooo$itemCopy");
     return Scaffold(
@@ -103,9 +103,7 @@ class ProductPage extends GetView<HomeController> {
                   children: ['S', 'M', 'L'].map((e) {
                     return Obx(() => InkWell(
                           onTap: () {
-                            itemCopy.update("Size", (value) {
-                              value = e;
-                            });
+
                             controller.currentSize.value = e;
                           },
                           child: Padding(
@@ -169,11 +167,16 @@ class ProductPage extends GetView<HomeController> {
               ),
               InkWell(
                 onTap: () {
-
-                  controller.myCartList.add(Product(itemCopy,controller.currentSize.value));
-
+                  // controller.myCartList.clear();
+                  controller.currentId.value += 1;
+                  controller.myCartList.add(Product(
+                      itemCopy,
+                      controller.currentSize,
+                      controller.currentId.value + 1));
+                  //
+                  //
                   print(
-                      "ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd${controller.myCartList[0].productProperties}");
+                      "ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd${controller.currentId.value},${controller.myCartList[controller.myCartList.length - 1]} ");
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text("Item Added to Cart"),
