@@ -169,7 +169,11 @@ class ProductPage extends GetView<HomeController> {
                 onTap: () {
                   // controller.myCartList.clear();
                   controller.currentId.value += 1;
-                  controller.myCartList.add(Product(
+                  // controller.myCartList.add(Product(
+                  //     itemCopy,
+                  //     controller.currentSize,
+                  //     controller.currentId.value + 1));
+                  controller.addToCart('mycart', Product(
                       itemCopy,
                       controller.currentSize,
                       controller.currentId.value + 1));
