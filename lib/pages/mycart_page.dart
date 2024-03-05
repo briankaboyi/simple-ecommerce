@@ -10,7 +10,8 @@ import 'package:simplecommerce/widgets/text_widget.dart';
 class MyCartPage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
-    // print(controller.myCartList[0]);
+    controller.updatemycart();
+    print("${controller.mycart.isEmpty}ffffffffffffffffffffffffddddddddddddddddddssssssssssssssssssss");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -43,7 +44,7 @@ class MyCartPage extends GetView<HomeController> {
           )
         ],
       ),
-      body: controller.myCartList.isEmpty
+      body: controller.mycart.isEmpty
           ? Center(
               child: TextWidget(
                   value: 'your cart items will appear here',
@@ -58,14 +59,14 @@ class MyCartPage extends GetView<HomeController> {
                   Container(
                     height: 450,
                     child:ListView.builder(
-                      itemCount: controller.myCartList.length,
+                      itemCount: controller.mycart.length,
                       itemBuilder: (context, index) {
                         // var item = controller.myCartList[index]!;
                         var item =
-                            controller.myCartList[index].productProperties;
-                        var iteme = controller.myCartList[index];
+                            controller.mycart[index].productProperties;
+                        var iteme = controller.mycart[index];
 
-                        var itemId = controller.myCartList[index].id;
+                        var itemId = controller.mycart[index].id;
                         // Assuming the item has an 'id' field
 
                         return Padding(
@@ -272,7 +273,7 @@ class MyCartPage extends GetView<HomeController> {
                                           InkWell(
                                             onTap: () {
 
-                                              controller.updateCartRecords(controller.myCartList, itemId,  controller.currentSize
+                                              controller.updateCartRecords(controller.mycart, itemId,  controller.currentSize
                                                   .value );
                                               Navigator.pop(context);
                                             },
@@ -296,7 +297,7 @@ class MyCartPage extends GetView<HomeController> {
                                 img: item['img'],
                                 title: item['title'],
                                 price: item['price'],
-                                size: controller.myCartList[index].size
+                                size: controller.mycart[index].size
                               )),
                             ),
                           ),

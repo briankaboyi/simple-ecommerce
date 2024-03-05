@@ -1,6 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:simplecommerce/controller/home_controller.dart';
 import 'package:simplecommerce/entity/product.dart';
@@ -14,7 +15,6 @@ class ProductPage extends GetView<HomeController> {
     Map<String, dynamic> itemCopy = Map.from(controller
         .products[controller.currentIndex.value]); //the map properties
 
-    print("ooooooooooooooooooooooooooooooooooooooooooooooo$itemCopy");
     return Scaffold(
       backgroundColor: Color(0xffffffff),
       appBar: AppBar(
@@ -167,20 +167,31 @@ class ProductPage extends GetView<HomeController> {
               ),
               InkWell(
                 onTap: () {
-                  // controller.myCartList.clear();
-                  controller.currentId.value += 1;
-                  // controller.myCartList.add(Product(
-                  //     itemCopy,
-                  //     controller.currentSize,
-                  //     controller.currentId.value + 1));
-                  controller.addToCart('mycart', Product(
+                  // controller.mycart.clear();
+                  // controller.currentId.value += 1;
+
+
+
+                  var storageitems = json.decode(controller.storage.getItem('mycart').toString()) ??[];
+                  print(storageitems);
+                  storageitems.add(Product(
                       itemCopy,
                       controller.currentSize,
                       controller.currentId.value + 1));
+                  controller.storage.setItem('mycart',json.encode(storageitems));
+                  controller.updatemycart();
+                  print("gggggggggggggggggggggggggggggggggggggggggg${controller.mycart}");
+
+                  // var updateditems = [...storageitems,Product(
+                  //     itemCopy,
+                  //     controller.currentSize,
+                  //     controller.currentId.value + 1) ];
+                  // print(updateditems);
                   //
-                  //
-                  print(
-                      "ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd${controller.currentId.value},${controller.myCartList[controller.myCartList.length - 1]} ");
+                  // var info = jsonEncode(updateditems);
+                  // print(info);
+
+
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text("Item Added to Cart"),

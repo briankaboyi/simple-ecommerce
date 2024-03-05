@@ -4,22 +4,24 @@ import 'package:get/get.dart';
 import 'package:localstorage/localstorage.dart';
 
 class HomeController {
-  // var storage;
   final LocalStorage storage = new LocalStorage('localstorage_app');
-// Fix myBox initialization
-  HomeController() {
-
-    // storage = mystorage;
-    setMycart();
-    print('kkkkkdkdddddddddddddddddkkkkkkkkkkkkk${myCartList.value}');
+  var mycart;
+  updatemycart(){
+    mycart = storage.getItem('mycart')?? [];
   }
-setMycart() async{
-  await storage.ready;
-  !storage.getItem('mycart')?storage.setItem('mycart', []):
-  myCartList.value = await json.decode(storage.getItem('mycart').toList() ?? []);
-}
+  HomeController() {
+    // setMycart();
+  }
+  // setMycart() async {
+  //   await storage.ready;
+  //   !storage.getItem('mycart')
+  //       ? storage.setItem('mycart', [])
+  //       : myCartList.value =
+  //           await json.decode(storage.getItem('mycart').toList() ?? []);
+  // }
+
   addToCart(key, newContent) {
-    var storageitems = jsonDecode(storage.getItem('mycart'))??[];
+    var storageitems = jsonDecode(storage.getItem('mycart')) ?? [];
     print(storageitems);
     var updateditems = [...storageitems, newContent];
     print(updateditems);
@@ -92,23 +94,12 @@ setMycart() async{
       'price': 'KSH 1,590'
     },
   ];
-  RxList myCartList =  [].obs;
+  RxList myCartList = [].obs;
 
   updateCartRecords(List records, int id, var newContent) {
-    //check if the record is in the list
     var edititem = records.where((element) => element.id == id);
     print("lllllllllllllllllllllllllllllllllllllllll$edititem");
 
-//records is the main list.
-    //element represents the map in the records
-    //id is the index of the element in the records
-
-    //the updatecartrecords funtion takes the records, the index of the clicked element, and the newcontent you want to update ,
-    //if the maps id is the same as its index in the records then we add the new content to the map. in this case the size with its prefered size.
-    //so in this case, the size will be added after the item has already been added to the mycart page and then has to be edited.
-
-    //its not the right approach for me because it adds to the process of buying somenthing from the app.
-    //i want to add items to the cart already edited, then it can be changed afterwards.
     records.forEach((element) {
       if (element.id == id) {
         element.size.value = newContent;
