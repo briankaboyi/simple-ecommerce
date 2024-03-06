@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
@@ -11,7 +13,11 @@ class MyCartPage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     controller.updatemycart();
-    print("${controller.mycart.isEmpty}ffffffffffffffffffffffffddddddddddddddddddssssssssssssssssssss");
+    var m = controller.mycart.toString();
+    print(
+        "${m.isEmpty}ffffffffffffffffffffffffddddddddddddddddddssssssssssssssssssss");
+    print(
+        "ddddxxxxxxxxxxxxxxxxxxxxdddddddddddddddd${m[0]}${m[1]}");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -58,12 +64,16 @@ class MyCartPage extends GetView<HomeController> {
                 children: [
                   Container(
                     height: 450,
-                    child:ListView.builder(
+                    child: ListView.builder(
                       itemCount: controller.mycart.length,
                       itemBuilder: (context, index) {
                         // var item = controller.myCartList[index]!;
-                        var item =
-                            controller.mycart[index].productProperties;
+                        var m = json.decode(controller.mycart.toString());
+
+                        // print("ddddxxxxxxxxxxxxxxxxxxxxdddddddddddddddd${m}");
+                        print("ddddxxxxxxxxxxxxxxxxxxxxdddddddddddddddd${m[index]}");
+                        var item = controller.mycart[index].productProperties;
+
                         var iteme = controller.mycart[index];
 
                         var itemId = controller.mycart[index].id;
@@ -79,9 +89,9 @@ class MyCartPage extends GetView<HomeController> {
                                   isScrollControlled: true,
                                   constraints: BoxConstraints(
                                     minHeight:
-                                    context.mediaQuerySize.height * .8,
+                                        context.mediaQuerySize.height * .8,
                                     maxHeight:
-                                    context.mediaQuerySize.height * .8,
+                                        context.mediaQuerySize.height * .8,
                                   ),
                                   builder: (context) {
                                     // return SizedBox(
@@ -153,7 +163,7 @@ class MyCartPage extends GetView<HomeController> {
                                           top: 15.0, left: 15, right: 15),
                                       child: Column(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                            CrossAxisAlignment.start,
                                         children: [
                                           SizedBox(
                                             width: Get.width,
@@ -183,18 +193,17 @@ class MyCartPage extends GetView<HomeController> {
                                                       text: '⭐ 4.5/5',
                                                       style: TextStyle(
                                                           fontWeight:
-                                                          FontWeight
-                                                              .bold)),
+                                                              FontWeight.bold)),
                                                   TextSpan(
                                                       text: '(45 reviews)',
                                                       style: TextStyle(
                                                           fontWeight:
-                                                          FontWeight
-                                                              .w200)),
+                                                              FontWeight.w200)),
                                                 ]),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(top:40.0),
+                                            padding: const EdgeInsets.only(
+                                                top: 40.0),
                                             child: TextWidget(
                                                 value: 'Choose size',
                                                 fontSize: 20,
@@ -206,75 +215,72 @@ class MyCartPage extends GetView<HomeController> {
                                                 top: 10.0, bottom: 15),
                                             child: Row(
                                               children:
-                                              ['S', 'M', 'L'].map((e) {
+                                                  ['S', 'M', 'L'].map((e) {
                                                 return Obx(() => InkWell(
-                                                  onTap: () {
-                                                    controller.currentSize
-                                                        .value = e;
-                                                  },
-                                                  child: Padding(
-                                                    padding:
-                                                    const EdgeInsets
-                                                        .only(
-                                                        right: 8.0),
-                                                    child: Container(
-                                                      decoration:
-                                                      BoxDecoration(
-                                                        borderRadius:
-                                                        BorderRadius
-                                                            .circular(
-                                                            6.25),
-                                                        border: Border.all(
-                                                            color: Colors
-                                                                .black),
-                                                        color: controller
-                                                            .currentSize
-                                                            .value ==
-                                                            e
-                                                            ? Colors.black
-                                                            : Colors
-                                                            .white,
-                                                      ),
+                                                      onTap: () {
+                                                        controller.currentSize
+                                                            .value = e;
+                                                      },
                                                       child: Padding(
                                                         padding:
-                                                        const EdgeInsets
-                                                            .only(
-                                                            top: 15.0,
-                                                            bottom:
-                                                            15,
-                                                            right: 19,
-                                                            left: 19),
-                                                        child: TextWidget(
-                                                          value: e,
-                                                          fontSize: 20,
-                                                          fontWeight:
-                                                          FontWeight
-                                                              .w500,
-                                                          textAlign:
-                                                          TextAlign
-                                                              .start,
-                                                          color: controller
-                                                              .currentSize
-                                                              .value ==
-                                                              e
-                                                              ? Colors
-                                                              .white
-                                                              : Colors
-                                                              .black,
+                                                            const EdgeInsets
+                                                                .only(
+                                                                right: 8.0),
+                                                        child: Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        6.25),
+                                                            border: Border.all(
+                                                                color: Colors
+                                                                    .black),
+                                                            color: controller
+                                                                        .currentSize
+                                                                        .value ==
+                                                                    e
+                                                                ? Colors.black
+                                                                : Colors.white,
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .only(
+                                                                    top: 15.0,
+                                                                    bottom: 15,
+                                                                    right: 19,
+                                                                    left: 19),
+                                                            child: TextWidget(
+                                                              value: e,
+                                                              fontSize: 20,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500,
+                                                              textAlign:
+                                                                  TextAlign
+                                                                      .start,
+                                                              color: controller
+                                                                          .currentSize
+                                                                          .value ==
+                                                                      e
+                                                                  ? Colors.white
+                                                                  : Colors
+                                                                      .black,
+                                                            ),
+                                                          ),
                                                         ),
                                                       ),
-                                                    ),
-                                                  ),
-                                                ));
+                                                    ));
                                               }).toList(),
                                             ),
                                           ),
-
                                           InkWell(
                                             onTap: () {
-
-                                              controller.updateCartRecords(controller.mycart, itemId,  controller.currentSize
-                                                  .value );
+                                              controller.updateCartRecords(
+                                                  controller.mycart,
+                                                  itemId,
+                                                  controller.currentSize.value);
                                               Navigator.pop(context);
                                             },
                                             child: ButtonWidgets(
@@ -294,11 +300,10 @@ class MyCartPage extends GetView<HomeController> {
                               key: ValueKey(
                                   itemId), // Use the item's ID as the key
                               child: Obx(() => CartProductWidget(
-                                img: item['img'],
-                                title: item['title'],
-                                price: item['price'],
-                                size: controller.mycart[index].size
-                              )),
+                                  img: item['img'],
+                                  title: item['title'],
+                                  price: item['price'],
+                                  size: controller.mycart[index].size)),
                             ),
                           ),
                         );

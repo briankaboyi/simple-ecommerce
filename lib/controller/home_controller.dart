@@ -6,11 +6,27 @@ import 'package:localstorage/localstorage.dart';
 class HomeController {
   final LocalStorage storage = new LocalStorage('localstorage_app');
   var mycart;
-  updatemycart(){
-    mycart = storage.getItem('mycart')?? [];
-  }
+
   HomeController() {
-    // setMycart();
+    initializeCart();
+  }
+  Future<void> initializeCart() async {
+    await updatemycart();
+  }
+
+  Future<void> updatemycart() async {
+    bool isStorageReady = await storage.ready;
+    if(isStorageReady) {
+      final data = await storage.getItem('mycart');
+
+      if (data != null ) {
+        mycart = data;
+        print("ffffffffffffffffffffffffddddddddddddddddddssssssssssssssssssss${mycart}");
+      } else {
+        mycart = [];
+      }
+    }
+
   }
   // setMycart() async {
   //   await storage.ready;
