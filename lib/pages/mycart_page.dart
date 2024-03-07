@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:simplecommerce/controller/home_controller.dart';
+import 'package:simplecommerce/entity/product.dart';
 import 'package:simplecommerce/widgets/button_widget.dart';
 import 'package:simplecommerce/widgets/cart_product_widget.dart';
 import 'package:simplecommerce/widgets/cart_widget.dart';
@@ -13,11 +14,7 @@ class MyCartPage extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     controller.updatemycart();
-    var m = controller.mycart.toString();
-    print(
-        "${m.isEmpty}ffffffffffffffffffffffffddddddddddddddddddssssssssssssssssssss");
-    print(
-        "ddddxxxxxxxxxxxxxxxxxxxxdddddddddddddddd${m[0]}${m[1]}");
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -68,22 +65,29 @@ class MyCartPage extends GetView<HomeController> {
                       itemCount: controller.mycart.length,
                       itemBuilder: (context, index) {
                         // var item = controller.myCartList[index]!;
-                        var m = json.decode(controller.mycart.toString());
+                        var m = jsonDecode(controller.mycart.toString());
+                        List<Product> products = (m as List)
+                            .map((item) => Product.fromJson(item))
+                            .toList();
 
-                        // print("ddddxxxxxxxxxxxxxxxxxxxxdddddddddddddddd${m}");
-                        print("ddddxxxxxxxxxxxxxxxxxxxxdddddddddddddddd${m[index]}");
-                        var item = controller.mycart[index].productProperties;
+                        var item;
 
-                        var iteme = controller.mycart[index];
+                        if (index < products.length) {
+                          item = products[index].productProperties;
+                        } else {
+                          return null;
+                        }
 
-                        var itemId = controller.mycart[index].id;
+                        var iteme = m[index];
+                        String mysize = m[index]["size"];
+                        RxString rxsize = mysize.obs;
+                        var itemId = m[index]["id"];
                         // Assuming the item has an 'id' field
 
                         return Padding(
                           padding: const EdgeInsets.only(top: 12.0),
                           child: InkWell(
                             onTap: () {
-                              print("opopopopopopopopopopopopop$iteme");
                               showModalBottomSheet(
                                   context: context,
                                   isScrollControlled: true,
@@ -94,70 +98,6 @@ class MyCartPage extends GetView<HomeController> {
                                         context.mediaQuerySize.height * .8,
                                   ),
                                   builder: (context) {
-                                    // return SizedBox(
-                                    //   height: 400,
-                                    //   child: Column(
-                                    //     children: [
-                                    //
-                                    //       Row(
-                                    //         children: ['S', 'M', 'L'].map((e) {
-                                    //           return Obx(() => InkWell(
-                                    //                 onTap: () {
-                                    //                   controller.currentSize
-                                    //                       .value = e;
-                                    //                 },
-                                    //                 child: Padding(
-                                    //                   padding:
-                                    //                       const EdgeInsets.only(
-                                    //                           right: 8.0),
-                                    //                   child: Container(
-                                    //                     decoration:
-                                    //                         BoxDecoration(
-                                    //                       borderRadius:
-                                    //                           BorderRadius
-                                    //                               .circular(
-                                    //                                   6.25),
-                                    //                       border: Border.all(
-                                    //                           color:
-                                    //                               Colors.black),
-                                    //                       color: controller
-                                    //                                   .currentSize
-                                    //                                   .value ==
-                                    //                               e
-                                    //                           ? Colors.black
-                                    //                           : Colors.white,
-                                    //                     ),
-                                    //                     child: Padding(
-                                    //                       padding:
-                                    //                           const EdgeInsets
-                                    //                               .only(
-                                    //                               top: 15.0,
-                                    //                               bottom: 15,
-                                    //                               right: 19,
-                                    //                               left: 19),
-                                    //                       child: TextWidget(
-                                    //                         value: e,
-                                    //                         fontSize: 20,
-                                    //                         fontWeight:
-                                    //                             FontWeight.w500,
-                                    //                         textAlign:
-                                    //                             TextAlign.start,
-                                    //                         color: controller
-                                    //                                     .currentSize
-                                    //                                     .value ==
-                                    //                                 e
-                                    //                             ? Colors.white
-                                    //                             : Colors.black,
-                                    //                       ),
-                                    //                     ),
-                                    //                   ),
-                                    //                 ),
-                                    //               ));
-                                    //         }).toList(),
-                                    //       )
-                                    //     ],
-                                    //   ),
-                                    // );
                                     return Padding(
                                       padding: const EdgeInsets.only(
                                           top: 15.0, left: 15, right: 15),
@@ -278,7 +218,7 @@ class MyCartPage extends GetView<HomeController> {
                                           InkWell(
                                             onTap: () {
                                               controller.updateCartRecords(
-                                                  controller.mycart,
+                                                  products,
                                                   itemId,
                                                   controller.currentSize.value);
                                               Navigator.pop(context);
@@ -299,11 +239,11 @@ class MyCartPage extends GetView<HomeController> {
                             child: Container(
                               key: ValueKey(
                                   itemId), // Use the item's ID as the key
-                              child: Obx(() => CartProductWidget(
+                              child: CartProductWidget(
                                   img: item['img'],
                                   title: item['title'],
                                   price: item['price'],
-                                  size: controller.mycart[index].size)),
+                                  size: rxsize),
                             ),
                           ),
                         );

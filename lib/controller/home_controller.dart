@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:localstorage/localstorage.dart';
+import 'package:simplecommerce/entity/product.dart';
 
 class HomeController {
   final LocalStorage storage = new LocalStorage('localstorage_app');
@@ -16,25 +17,16 @@ class HomeController {
 
   Future<void> updatemycart() async {
     bool isStorageReady = await storage.ready;
-    if(isStorageReady) {
+    if (isStorageReady) {
       final data = await storage.getItem('mycart');
 
-      if (data != null ) {
+      if (data != null) {
         mycart = data;
-        print("ffffffffffffffffffffffffddddddddddddddddddssssssssssssssssssss${mycart}");
       } else {
         mycart = [];
       }
     }
-
   }
-  // setMycart() async {
-  //   await storage.ready;
-  //   !storage.getItem('mycart')
-  //       ? storage.setItem('mycart', [])
-  //       : myCartList.value =
-  //           await json.decode(storage.getItem('mycart').toList() ?? []);
-  // }
 
   addToCart(key, newContent) {
     var storageitems = jsonDecode(storage.getItem('mycart')) ?? [];
@@ -112,18 +104,11 @@ class HomeController {
   ];
   RxList myCartList = [].obs;
 
-  updateCartRecords(List records, int id, var newContent) {
-    var edititem = records.where((element) => element.id == id);
-    print("lllllllllllllllllllllllllllllllllllllllll$edititem");
-
+  updateCartRecords(List<Product> records, int id, var newContent) {
     records.forEach((element) {
       if (element.id == id) {
         element.size.value = newContent;
       }
     });
-  }
-
-  trigger() {
-    updateCartRecords(myCartList, 04, {"size": "M"});
   }
 }

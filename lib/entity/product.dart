@@ -2,9 +2,11 @@ import 'package:get/get.dart';
 
 class Product {
   Map<String, dynamic> productProperties;
-  RxString size = 'S'.obs ;
+  RxString size = 'S'.obs;
   int id;
-  Product(this.productProperties, this.size,this.id);
+
+  Product(this.productProperties, this.size, this.id);
+
   // Deserialize from JSON
   Product.fromJson(Map<String, dynamic> json)
       : productProperties = json['productProperties'],
@@ -17,6 +19,7 @@ class Product {
     'size': size.value, // Convert RxString to String
     'id': id,
   };
+
   @override
   String toString() {
     return 'Product{productProperties: $productProperties, size: $size, id: $id}';
