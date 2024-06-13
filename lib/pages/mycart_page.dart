@@ -265,7 +265,7 @@ class MyCartPage extends GetView<HomeController> {
                                   fontWeight: FontWeight.w300,
                                   textAlign: TextAlign.center),
                               TextWidget(
-                                  value: 'PKR 5,870',
+                                  value: 'PKR 2,290',
                                   fontSize: 16,
                                   fontWeight: FontWeight.w300,
                                   textAlign: TextAlign.center),
@@ -315,7 +315,7 @@ class MyCartPage extends GetView<HomeController> {
                                   fontWeight: FontWeight.w400,
                                   textAlign: TextAlign.center),
                               TextWidget(
-                                  value: 'PKR 5,950',
+                                  value: 'PKR 2,370',
                                   fontSize: 18,
                                   fontWeight: FontWeight.w400,
                                   textAlign: TextAlign.center),

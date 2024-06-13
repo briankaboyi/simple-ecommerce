@@ -12,9 +12,11 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 class MyHomePage extends GetView<HomeController> {
   final TextEditingController _searchController = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+
     return Scaffold(
       backgroundColor: Color(0xffffffff),
       appBar: AppBar(

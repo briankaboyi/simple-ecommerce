@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:get/get.dart';
 import 'package:localstorage/localstorage.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:simplecommerce/entity/product.dart';
 
 class HomeController {
@@ -11,6 +12,30 @@ class HomeController {
   HomeController() {
     initializeCart();
   }
+
+  // getPermissions() async{
+  //   var res = await Permission.sms
+  //       .onDeniedCallback(() {
+  //     // Your code
+  //   })
+  //       .onGrantedCallback(() {
+  //     // Your code
+  //   })
+  //       .onPermanentlyDeniedCallback(() {
+  //     // Your code
+  //   })
+  //       .onRestrictedCallback(() {
+  //     // Your code
+  //   })
+  //       .onLimitedCallback(() {
+  //     // Your code
+  //   })
+  //       .onProvisionalCallback(() {
+  //     // Your code
+  //   })
+  //       .request();
+  // }
+
   Future<void> initializeCart() async {
     await updatemycart();
   }

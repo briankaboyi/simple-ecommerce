@@ -33,7 +33,7 @@ class CartWidget extends GetView<HomeController> {
               ),
               child: Center(
                   child: Text(
-                '2',
+                '1',
                 style:
                     TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
               )),
